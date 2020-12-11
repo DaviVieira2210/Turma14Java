@@ -12,7 +12,13 @@ public class CadLoja5 {
 		int tipo = 0;
 		String nomeCliente;
 		int opcaoContinua = 0;
-
+		String nomeProdutos[] = {"CAMISETA", "BOLA DE FUTEBOL", "BOLA DE BASQUETE", "BOLA DE TÊNIS", "BONÉ", "RAQUETE", "SHORT", "REAGATA", "CHUTEIRA", "MEIÃO"};
+		int estoque[] = new int[10];
+		double precoUnitarios[] = {65,65,50,20,30,80,120,35,80,40};
+		String codigos[] = new String [10];
+		String escolhaProduto;
+		
+		
 		do {
 
 			linha();
@@ -41,7 +47,21 @@ public class CadLoja5 {
 				} else if (genero == 2) {
 					System.out.println("Seja bem-vinda à loja Sra." + nomeCliente+"!");
 				}
-
+				linha();
+				pula();
+				System.out.println("CÓDIGO\t\tPREÇO\t\tESTOQUE\t\tPRODUTO");
+				for(int i=0; i<10; i++)
+				{			
+					estoque[i] = 10;
+					codigos[i]=((i<9)? "DSV-00" + (i+1): "DSV-0"+(i+1));
+					System.out.printf("%s\t\t%.2f\t\t%d\t%s\n",codigos[i],precoUnitarios[i],estoque[i],nomeProdutos[i]);
+					
+				}
+				System.out.println("Digite o código do produto desejado: ");
+				escolhaProduto = leia.next();
+				
+				
+				
 				System.out.println("\nDeseja continuar? [1]Sim [2]Não");
 				opcaoContinua = leia.nextInt();
 				if(opcaoContinua == 2)

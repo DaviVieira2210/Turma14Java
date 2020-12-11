@@ -16,7 +16,7 @@ public class contaPoupanca {
 		String nome;
 		double credito=0, debito = 0;
 		char tipo = 0;
-		double movimentos[] = {0,1,2,3};
+		double movimentos[] = new double [3];
 		int dataAniversarioConta = 22, dataComparacao;
 		String cpfClientes[] = {"111.111.111-11", "222.222.222-22", "333.333.333-33", "444.444.444-440", "555.555.555-55"};
 		String contas[] = {"UNIVERSITARIA", "POUPANCA", "ESPECIAL", "CORRENTE", "EMPRESA"};
@@ -38,7 +38,7 @@ public class contaPoupanca {
 
 		do {
 		
-			for(int x=0; x<2; x++)
+			for(int i=0; i<2; i++)
 			{
 				System.out.println("[D]DÉBITO OU [C]CRÉDITO:");
 				tipo = leia.next().toUpperCase().charAt(0);
@@ -51,7 +51,7 @@ public class contaPoupanca {
 				}
 					if(saldo >= debito)
 					{
-					movimentos[x]=(saldo - debito);
+					movimentos[i]=(saldo - debito);
 					}
 			
 			
