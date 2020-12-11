@@ -87,7 +87,7 @@ public class CadLoja5 {
 		
 		int tamanho = 15;
 		for(int x = 1;x<=tamanho;x++)	
-		System.out.print("🏄");
+		System.out.print("-");
 	}
 
 	public static void pula() {
