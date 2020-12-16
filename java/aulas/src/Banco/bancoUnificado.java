@@ -538,7 +538,7 @@ public class bancoUnificado {
 	}
 
 	static void pula() {
-		System.out.println();
+		System.out.println("\n");
 	}
 	
 	//faz linha

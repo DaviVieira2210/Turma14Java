@@ -5,16 +5,35 @@ public class LojaLoka
 	public static void main(String[] args)
 	{
 		
+		Pessoa clienteAvulso = new Pessoa();
 		Scanner leia = new Scanner(System.in);
 		Pessoa cliente = new Pessoa();
 		Produto produto = new Produto();
+		Produto produto2 = new Produto();
+		Produto produto3 = new Produto();
+		Produto produto4 = new Produto();
 		
-		Pessoa clienteAvulso = new Pessoa();
+		
+		produto.nomeProduto = "Vestido";
+		produto.qtdeProduto = 3;
+		
+		
 		
 		clienteAvulso.nome = "EDNILSON";
 		clienteAvulso.genero = 'M';
 		clienteAvulso.anoNascimento = 1974;
 		
+		/*public String produto = "Vestido";
+		public int qtde = 3;
+		public double valor = 100.00;
+		
+		String produto2 = "Blusa";
+		public int qtde2 = 1 ;
+		public double valor2 = 50.00;
+		
+		String produto3 = "Camiseta";
+		public int qtde3 = 20;
+		public double valor3 = 20.00;*/
 		
 		
 		
@@ -43,10 +62,11 @@ public class LojaLoka
 		//System.out.println("PRODUTO DISPONIVEL NO MOMENTO:");
 		//System.out.printf("PRODUTO: %s, qtde: %d, valor R$: %.2f\n", produto, qtde, valorProduto);
 		
-		System.out.println("Qual produto deseja comprar? ");
+	/*	System.out.println("Qual produto deseja comprar? ");
+		produto = leia.next();
 		System.out.println(produto.produto);
 		System.out.println(produto.produto2);
-		System.out.println(produto.produto3);
+		System.out.println(produto.produto3);*/
 		
 		
 		

@@ -52,6 +52,6 @@ public class CadLoja3 {
 	}
 	public static void pula()
 	{
-	System.out.println();
+	System.out.println("\n");
 	}
 }
