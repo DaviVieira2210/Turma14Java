@@ -1,4 +1,4 @@
-package Loja;
+package LojasTeste;
 import java.util.Scanner;
 public class CadLoja {
 	public static void main (String[] args)
@@ -50,7 +50,7 @@ public class CadLoja {
 	
 	
 	public static void linhaDetalhe() {
-		System.out.println("ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„");
+		System.out.println("ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„");
 		
 	}
 	

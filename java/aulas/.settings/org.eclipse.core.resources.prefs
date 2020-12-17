@@ -1,8 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/Banco/bancoUnificado.java=UTF-8
 encoding//src/Banco/contaPoupanca.java=UTF-8
-encoding//src/Loja/CadLoja.java=UTF-8
-encoding//src/Loja/CadLoja2.java=UTF-8
-encoding//src/Loja/CadLoja3.java=UTF-8
-encoding//src/Loja/CadLoja4.java=UTF-8
-encoding//src/Loja/CadLoja5.java=UTF-8
+encoding//src/Loja/SurfDavis.java=UTF-8
+encoding//src/LojasTeste/CadLoja.java=UTF-8
+encoding//src/LojasTeste/CadLoja2.java=UTF-8
+encoding//src/LojasTeste/CadLoja3.java=UTF-8
+encoding//src/LojasTeste/CadLoja4.java=UTF-8
+encoding//src/LojasTeste/CadLoja5.java=UTF-8

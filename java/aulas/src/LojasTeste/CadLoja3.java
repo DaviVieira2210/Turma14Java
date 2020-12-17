@@ -1,4 +1,4 @@
-package Loja;
+package LojasTeste;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class CadLoja3 {
 		String nomeCliente;
 		
 		linha();
-		System.out.println("              ğ•Šğ•¦ğ•£ğ•— ğ”»ğ•’ğ•§ğ•š'ğ•¤");
+		System.out.println("              ğ?•Šğ?•¦ğ?•£ğ?•— ğ?”»ğ?•’ğ?•§ğ?•š'ğ?•¤");
 		linha();
 		pula();				
 		
@@ -48,7 +48,7 @@ public class CadLoja3 {
 	}
 	public static void linha()
 	{
-	System.out.println("ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„ğŸ„");
+	System.out.println("ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„ğŸ?„");
 	}
 	public static void pula()
 	{

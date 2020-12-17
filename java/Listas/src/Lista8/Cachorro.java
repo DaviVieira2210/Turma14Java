@@ -22,7 +22,7 @@ public class Cachorro extends Animal{
 			}
 			else if(testeCorre == 'N')
 			{
-				System.out.println("ESTE ANIMAL NÃO CORRE!");
+				System.out.println("ESTE ANIMAL CORRE?");
 				corre = false;
 			}
 		return corre;
@@ -41,7 +41,7 @@ public class Cachorro extends Animal{
 			else if(emitiSom == 'N')
 			{			
 				som = false;
-				System.out.println("ESTE ANIMAL NÃO PRODUZ SOM! ");
+				System.out.println("ESTE ANIMAL LATE? ");
 			}
 			return som;
 		}

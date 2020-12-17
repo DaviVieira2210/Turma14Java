@@ -1,4 +1,4 @@
-package Loja;
+package LojasTeste;
 
 import java.util.Scanner;
 
@@ -23,8 +23,8 @@ public class CadLoja5 {
 
 			linha();
 			pula();
-			System.out.println("          𝕊𝕦𝕣𝕗 𝔻𝕒𝕧𝕚'𝕤");
-			System.out.println("꧁༺ Qualidade para você ༻꧂");
+			System.out.println("    SURF DAVI'S");
+			System.out.println("Qualidade para você");
 			linha();
 			pula();
 

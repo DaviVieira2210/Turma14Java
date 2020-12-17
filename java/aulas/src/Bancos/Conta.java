@@ -1,48 +1,86 @@
 package Bancos;
 
-public class Conta {
+public abstract class Conta 
+{
+	
+	//ATRIBUTOS
+	private int numeroConta;//tem
+	private double saldo;//tem
+	private String cpf;//tem
+	public double debito;
+	public double credito;
+	
+	//CONSTRUTORES - REGRA DE CRIAÇÃO DA CLASSE
+	//PEDREIRO E PEÃO DE OBRA
+	
+	// *SOBRECARGA //A MESMA COISA DE UM JEITO DIFERENTE
+	public Conta(int numeroConta) 
+	{
+		this.numeroConta = numeroConta;
+	}
+	//*SOBRECARGA
+	public Conta(int numeroConta, String cpf)
+	{
+		this.numeroConta = numeroConta;
+		this.cpf = cpf;
+	}
+	
+	
+	//ENCAPSULAMENTO
+	public int getNumeroConta() {
+		return numeroConta;
+	}
 
-	public int numeroConta;
-	public double saldo;
-	public String cpf;
 	
+	public double getSaldo() {
+		return saldo;
+	}
 
-	public Conta()
-	{
-	   super();
+	public String getCpf() {
+		return cpf;
 	}
-	public Conta(int numeroConta)
-	{
-		this.numeroConta = numeroConta;
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
-	public Conta(int numeroConta, double saldo) 
+
+	
+	
+	//METODOS PROPRIOS
+	
+	public void debito(double valorDebito) 
 	{
-		this.numeroConta = numeroConta;
-		this.saldo = saldo;
-	}
-	public Conta(int numeroConta, double saldo, String cpf)
-	{
-		this.numeroConta = numeroConta;
-		this.saldo = saldo;
-		this.cpf=cpf;
+		if (testarSaldo(valorDebito))  
+		{
+			this.saldo = this.saldo - valorDebito;
+		} 
+		else
+		{
+			System.out.println("SALDO INDISPONIVEL");
+		}
+		
+		
 	}
 	
-	//Metodos
 	
-	public void debito(double valorDebito)
-	{
-		this.saldo = this.saldo - valorDebito;
-	}
-	public void credito(double valorCredito)
+	
+	public void credito (double valorCredito) 
 	{
 		this.saldo = this.saldo + valorCredito;
 	}
 	
+	public boolean testarSaldo(double valor) 
+	{
+		
+		boolean teste;
+		if (valor <= this.saldo) {
+			teste = true;
+		} else {
+			teste = false;
+		}
+		
+		return teste;
+	}
 	
 	
-	
-	
-	
-	
-	
-}	
+}
