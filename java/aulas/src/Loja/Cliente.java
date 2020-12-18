@@ -12,6 +12,10 @@ public class Cliente extends Pessoa{
 		super(nome, genero, anoNascimento);
 		this.cpf = cpf;
 	}
+	public Cliente(String nome, char genero, int anoNascimento) {
+		super(nome, genero, anoNascimento);
+		
+	}
 	public Cliente(String cpf)
 	{
 		this.cpf = cpf;
@@ -25,6 +29,9 @@ public class Cliente extends Pessoa{
 	//Getters and Setters
 	
 
+	public Cliente(String nome, String cpf2, int anoNascimento) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getCpf() {
 		return cpf;
 	}
