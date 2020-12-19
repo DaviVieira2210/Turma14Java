@@ -10,7 +10,7 @@ public abstract class Pessoa {
 	private String nome;
 	private char genero;
 	private int anoNascimento;
-	private int anoAtual= ano.get(Calendar.YEAR);
+	private int anoAtual = ano.get(Calendar.YEAR);
 
 	
 	//Construtores
@@ -74,17 +74,22 @@ public abstract class Pessoa {
 	public int getAnoNascimento() {
 		return anoNascimento;
 	}
-
-
-	public void setAnoNascimento(int anoNascimento) {
+	public void setAnoNascimento(int anoNascimento)
+	{
 		this.anoNascimento = anoNascimento;
 	}
+
+
+	/*public void setAnoNascimento(int anoNascimento) {
+		this.anoNascimento = anoNascimento;
+	}*/
 	
 	//Método
 	
-	public int setvoltaIdade()
-	{
-		return(this.anoAtual - anoNascimento);
-	}
+	public int voltaIdade(int anoAtual)
+    {
+
+        return anoAtual - this.anoNascimento;
+    }
 	
 }

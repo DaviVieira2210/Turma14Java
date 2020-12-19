@@ -29,7 +29,7 @@ public class Cliente extends Pessoa{
 	//Getters and Setters
 	
 
-	public Cliente(String nome, String cpf2, int anoNascimento) {
+	public Cliente(String nome, String cpf, int anoNascimento) {
 		// TODO Auto-generated constructor stub
 	}
 	public String getCpf() {
@@ -41,9 +41,13 @@ public class Cliente extends Pessoa{
 	
 	
 	
-	//Método
+	//Método Corrige cpf
 	
-	//Corrige cpf
-
-
+	public void corrigeCpf(String cpf)
+	{
+		if(cpf == "0")
+		{
+			System.out.println("O CPF digitado está incorreto!");
+		}
+	}
 }

@@ -115,8 +115,8 @@ public class Produto
 
 	@Override
 	public String toString() {
-		return "Produto [nomeProduto=" + nomeProduto + ", codigo=" + codigo + ", precoUnitario=" + precoUnitario
-				+ ", qtdeProdutoEstoque=" + qtdeProdutoEstoque + "]";
+		return "|"+nomeProduto + "\t|" + codigo + "\t|R$" + precoUnitario
+				+ "   |" + qtdeProdutoEstoque ;
 	}
 	
 	
