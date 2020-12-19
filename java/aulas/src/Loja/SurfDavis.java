@@ -265,10 +265,11 @@ public class SurfDavis{
 							System.out.println("║      ║|║|║║||║║|║║||    ║");
 							System.out.println("║       568754568956      ║");
 							System.out.println("╚═════════════════════════╝");
+							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f\n",parcelas);
 							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
 							opcaoCompra = leia.next().toUpperCase().charAt(0);
 							
-							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f\n",parcelas);
+							
 						}
 						else if(parcelaVezes <= 3 && parcelaVezes >0 && cpfNota == 'N')
 						{
@@ -285,10 +286,11 @@ public class SurfDavis{
 							System.out.println("║      ║|║|║║||║║|║║||    ║");
 							System.out.println("║       568754568956      ║");
 							System.out.println("╚═════════════════════════╝");
+							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f",parcelas);
 							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
 							opcaoCompra = leia.next().toUpperCase().charAt(0);
 							
-							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f",parcelas);
+							
 						}
 						else if(parcelaVezes <=0)
 						{
@@ -316,7 +318,7 @@ public class SurfDavis{
 		}
 	public static void linha() {
 		
-		int tamanho = 20;
+		int tamanho = 21;
 		for(int x = 1;x<=tamanho;x++)	
 		System.out.print("🏄");
 	}
