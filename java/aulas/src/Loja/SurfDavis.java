@@ -1,6 +1,8 @@
 package Loja;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SurfDavis{
@@ -14,6 +16,8 @@ public class SurfDavis{
 		
 		Scanner leia = new Scanner(System.in);
 		Cliente person = new Cliente();
+		Locale real = new Locale("pt", "BR");
+		NumberFormat n = NumberFormat.getCurrencyInstance(real);
 		
 		List<Produto> listaProdutos = new ArrayList<>();
 		List<Produto> carrinho = new ArrayList<>();
@@ -28,7 +32,7 @@ public class SurfDavis{
 		listaProdutos.add(new Produto("BOLA/FUTEBOL", "DSV08", 259.99, 10));
 		listaProdutos.add(new Produto("VISEIRA BLACK", "DSV09", 129.99, 10));
 		listaProdutos.add(new Produto("ÓCULOS DE SOL", "DSV10", 145.99, 10));
-
+		
 		
 			linha();
 			System.out.println("\n\t\tSURF DAVI'S");
@@ -68,14 +72,15 @@ public class SurfDavis{
 				}
 				pula();
 				linha();
-				pula();			
+				pula();	
+				do {
 				System.out.println("\tLISTA DE PRODUTOS 🌊");
 				System.out.println("   PRODUTO\tCODIGO\t  PREÇO\t   UNDS");
-				do {
+				
 				for(Produto prod: listaProdutos)
 				{	
 				System.out.printf("|%s\t|%s\t|R$%.2f  |%d\n",prod.getNomeProduto(), prod.getCodigo(), prod.getPrecoUnitario(), 
-						prod.getQtdeProdutoEstoque());				
+						prod.getQtdeProdutoEstoque());	
 				}	
 				
 				
@@ -83,33 +88,41 @@ public class SurfDavis{
 				codigo = leia.next().toUpperCase();							
 				System.out.println("DIGITE A QUANTIDADE DESEJADA: ");
 				quantidade = leia.nextInt();
-				linha();								
-				pula();
+				for(Produto prod: listaProdutos)
+				{
+					if(codigo.equals(prod.getCodigo()))
+					{
+						if(quantidade <= prod.getQtdeProdutoEstoque())
+						{
+							linha();
+							pula();
+							System.out.println("\tCARRINHO DE COMPRAS");
+							prod.tiraEstoque(quantidade);
+							precoTotal = prod.getPrecoUnitario() * quantidade;
+							System.out.print("PREÇO UNITÁRIO: "+prod.getNomeProduto());
+							System.out.printf("  R$%.2f\n",prod.getPrecoUnitario());							
+							System.out.printf("PREÇO TOTAL: R$%.2f\n", precoTotal);
+							linha();
+							pula();
+							carrinho.add(new Produto(prod.getNomeProduto(), prod.getCodigo(), prod.getPrecoUnitario(), prod.getQtdeProdutoEstoque()));
+							
+						}
+						else if(quantidade > prod.getQtdeProdutoEstoque())
+						{
+							System.out.println("QUANTIDADE INDISPONÍVEL");
+							
+						}
+				}
+			}
+				//linha();								
+			//	pula();
 				System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
 				opcaoCompra = leia.next().toUpperCase().charAt(0);
 				if(opcaoCompra == 'N')
 				{	
 					linha();
 					pula();
-					System.out.println("\tCARRINHO DE COMPRAS");
-					for(Produto prod: listaProdutos)
-					{
-						if(quantidade > prod.getQtdeProdutoEstoque())
-						{
-							System.out.println("QUANTIDADE INDISPONÍVEL");
-							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
-							opcaoCompra = leia.next().toUpperCase().charAt(0);
-						}
-						if(codigo.equals(prod.getCodigo()))
-						{
-							System.out.print("PREÇO UNITÁRIO: "+prod.getNomeProduto());
-							System.out.printf("  R$%.2f\n",prod.getPrecoUnitario());
-							precoTotal = prod.getPrecoUnitario() * quantidade;
-							System.out.printf("PREÇO TOTAL: R$%.2f", precoTotal);
-							pula();
-							carrinho.add(new Produto(prod.getNomeProduto(), prod.getCodigo(), prod.getPrecoUnitario(), prod.getQtdeProdutoEstoque()));
-						}
-					}
+					System.out.println("\tFORMAS DE PAGAMENTO");
 					System.out.println("[1] - PAGAMENTO À VISTA - DESCONTO DE 10%");
 					System.out.println("[2] - DEBITO - VALOR SIMPLES");
 					System.out.println("[3] - CREDITO - ACRESCIMO DE 5%");
@@ -119,46 +132,163 @@ public class SurfDavis{
 					if(formaPagamento == 1)
 					{
 						System.out.println("CPF NA NOTA? S/N");
-						char cpfnota = leia.next().toUpperCase().charAt(0);
-						if(cpfnota == 'S')
+						char cpfNota = leia.next().toUpperCase().charAt(0);
+						if(cpfNota == 'S')
 						{
 							System.out.println("╔═════════════════════════╗");
 							System.out.println("║ NOTA FISCAL Nº 18202012 ║");
 							System.out.println("║                         ║ ");
-							System.out.printf ("║ CPF CLIENTE:%s          ║\n",cpf);
+							System.out.println("║CPF CLIENTE: "+cpf+    "\t  ║");
 							precoTotal -= precoTotal * 0.10;
 							System.out.println("║PAGAMENTO À VISTA        ║");
-							System.out.printf(" ║PREÇO TOTAL R$%.2f       ║", precoTotal);
-							System.out.printf(" ║IMPOSTOS: R$%.2f         ║\n",precoTotal*0.09);
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
 							System.out.println("║                         ║");
 							System.out.println("║      ║|║|║║||║║|║║||    ║");
 							System.out.println("║       568754456745      ║");
 							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+						}
+						else if(cpfNota == 'N')
+						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 18202012 ║");
+							System.out.println("║                         ║ ");
+							precoTotal -= precoTotal * 0.10;
+							System.out.println("║PAGAMENTO À VISTA        ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754456745      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
 						}
 					}
 					else if(formaPagamento == 2)
 					{
-						precoTotal = precoTotal;
-						System.out.println("PAGAMENTO NO DEBITO");
-						System.out.printf("PREÇO TOTAL R$%.2f\n", precoTotal);
+						System.out.println("CPF NA NOTA? S/N");
+						char cpfNota = leia.next().toUpperCase().charAt(0);
+						if(cpfNota == 'S')
+						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
+							System.out.println("║                         ║ ");
+							System.out.println("║CPF CLIENTE: "+cpf+    "\t  ║");
+							precoTotal = precoTotal;
+							System.out.println("║PAGAMENTO NO DÉBITO      ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754568956      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+						}
+						else if(cpfNota == 'N')
+						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
+							System.out.println("║                         ║ ");
+							precoTotal = precoTotal;
+							System.out.println("║PAGAMENTO NO DÉBITO      ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754568956      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+						}
 					}
 					else if(formaPagamento == 3)
 					{
-						precoTotal = precoTotal * 1.05;
-						System.out.println("PAGAMENTO NO CRÉDITO");
-						System.out.printf("PREÇO TOTAL R$%.2f\n", precoTotal);
-						
+						System.out.println("CPF NA NOTA? S/N");
+						char cpfNota = leia.next().toUpperCase().charAt(0);
+						if(cpfNota == 'S')
+						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
+							System.out.println("║                         ║ ");
+							System.out.println("║CPF CLIENTE: "+cpf+    "\t  ║");
+							precoTotal = precoTotal * 1.05;
+							System.out.println("║PAGAMENTO NO CRÉDITO     ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754568956      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+						}
+						else if(cpfNota == 'N')
+						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
+							System.out.println("║                         ║ ");
+							precoTotal = precoTotal * 1.05;
+							System.out.println("║PAGAMENTO NO CRÉDITO     ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754568956      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+						}
 					}
 					else if(formaPagamento == 4)
 					{
 						System.out.println("CREDITO EM ATÉ 3 VEZES");
 						System.out.println("DESEJA PARCELAR EM QUANTAS VEZES?");
 						int parcelaVezes = leia.nextInt();
-						if(parcelaVezes <= 3 && parcelaVezes >0)
+						System.out.println("CPF NA NOTA? S/N");
+						char cpfNota = leia.next().toUpperCase().charAt(0);
+						if(parcelaVezes <= 3 && parcelaVezes >0 && cpfNota == 'S')
 						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
+							System.out.println("║                         ║ ");
+							System.out.println("║CPF CLIENTE: "+cpf+    "\t  ║");
 							precoTotal += precoTotal * 0.1 * parcelaVezes;
 							parcelas = precoTotal / parcelaVezes;
+							System.out.println("║PAGAMENTO PARCELADO      ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754568956      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+							
 							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f\n",parcelas);
+						}
+						else if(parcelaVezes <= 3 && parcelaVezes >0 && cpfNota == 'N')
+						{
+							System.out.println("╔═════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
+							System.out.println("║                         ║ ");
+
+							precoTotal += precoTotal * 0.1 * parcelaVezes;
+							parcelas = precoTotal / parcelaVezes;
+							System.out.println("║PAGAMENTO PARCELADO      ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
+							System.out.println("║                         ║");
+							System.out.println("║      ║|║|║║||║║|║║||    ║");
+							System.out.println("║       568754568956      ║");
+							System.out.println("╚═════════════════════════╝");
+							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
+							opcaoCompra = leia.next().toUpperCase().charAt(0);
+							
+							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f",parcelas);
 						}
 						else if(parcelaVezes <=0)
 						{

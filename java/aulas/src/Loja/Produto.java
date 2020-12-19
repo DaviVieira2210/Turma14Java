@@ -48,7 +48,7 @@ public class Produto
 	}
 	
 	//Métodos
-	public void tiraEstoque(int saida) 
+	/*public void tiraEstoque(int saida) 
 	{
 		if (testarEstoque(saida))
 		{
@@ -60,7 +60,16 @@ public class Produto
 			System.out.println("ESTOQUE INDISPONIVEL");
 		}
 		
+	}*/
+	//método 2
+	public void tiraEstoque(int quantidade)
+	{
+		this.qtdeProdutoEstoque = this.qtdeProdutoEstoque - quantidade;
 	}
+	
+	
+	
+	
 	
 	public void adicionaEstoque(int entrada) 
 	{
