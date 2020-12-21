@@ -112,10 +112,8 @@ public class SurfDavis{
 							System.out.println("QUANTIDADE INDISPONÍVEL");
 							
 						}
+					}
 				}
-			}
-				//linha();								
-			//	pula();
 				System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
 				opcaoCompra = leia.next().toUpperCase().charAt(0);
 				if(opcaoCompra == 'N')
@@ -252,57 +250,59 @@ public class SurfDavis{
 						char cpfNota = leia.next().toUpperCase().charAt(0);
 						if(parcelaVezes <= 3 && parcelaVezes >0 && cpfNota == 'S')
 						{
-							System.out.println("╔═════════════════════════╗");
-							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
-							System.out.println("║                         ║ ");
-							System.out.println("║CPF CLIENTE: "+cpf+    "\t  ║");
+							System.out.println("╔══════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012  ║");
+							System.out.println("║                          ║ ");
+							System.out.println("║CPF CLIENTE: "+cpf+    "\t   ║");
 							precoTotal += precoTotal * 0.1 * parcelaVezes;
 							parcelas = precoTotal / parcelaVezes;
-							System.out.println("║PAGAMENTO PARCELADO      ║");
-							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
-							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
-							System.out.println("║                         ║");
-							System.out.println("║      ║|║|║║||║║|║║||    ║");
-							System.out.println("║       568754568956      ║");
-							System.out.println("╚═════════════════════════╝");
-							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f\n",parcelas);
+							System.out.println("║PAGAMENTO PARCELADO       ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t   ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t   ║");
+							System.out.println("║                          ║");
+							System.out.println("║      ║|║|║║||║║|║║||     ║");
+							System.out.println("║       568754568956       ║");
+							System.out.println("╚══════════════════════════╝");
+							System.out.printf("PREÇO TOTAL DAS PARCELAS: R$%.2f\n",parcelas);
 							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
 							opcaoCompra = leia.next().toUpperCase().charAt(0);
-							
-							
+								if(opcaoCompra == 'N')
+								{
+									System.out.println("Obrigado por escolher à SURF DAVI'S");
+									System.out.println("Volte sempre!");
+								}												
 						}
 						else if(parcelaVezes <= 3 && parcelaVezes >0 && cpfNota == 'N')
 						{
-							System.out.println("╔═════════════════════════╗");
-							System.out.println("║ NOTA FISCAL Nº 19202012 ║");
-							System.out.println("║                         ║ ");
+							System.out.println("╔══════════════════════════╗");
+							System.out.println("║ NOTA FISCAL Nº 19202012  ║");
+							System.out.println("║                          ║ ");
 
 							precoTotal += precoTotal * 0.1 * parcelaVezes;
 							parcelas = precoTotal / parcelaVezes;
-							System.out.println("║PAGAMENTO PARCELADO      ║");
-							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t  ║");
-							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t  ║");
-							System.out.println("║                         ║");
-							System.out.println("║      ║|║|║║||║║|║║||    ║");
-							System.out.println("║       568754568956      ║");
-							System.out.println("╚═════════════════════════╝");
-							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f",parcelas);
+							System.out.println("║PAGAMENTO PARCELADO       ║");
+							System.out.println("║PREÇO TOTAL:"+n.format(precoTotal)+"\t   ║");
+							System.out.println("║IMPOSTOS:"+n.format(precoTotal*0.09)+"\t   ║");
+							System.out.println("║                          ║");
+							System.out.println("║      ║|║|║║||║║|║║||     ║");
+							System.out.println("║       568754568956       ║");
+							System.out.println("╚══════════════════════════╝");
+							System.out.printf("PREÇO TOTAL DAS PARCELASR$%.2f\n",parcelas);
 							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
-							opcaoCompra = leia.next().toUpperCase().charAt(0);
-							
-							
+							opcaoCompra = leia.next().toUpperCase().charAt(0);		
+							if(opcaoCompra == 'N')
+							{
+								System.out.println("Obrigado por escolher à SURF DAVI'S");
+								System.out.println("Volte sempre!");
+							}
 						}
 						else if(parcelaVezes <=0)
 						{
 							System.out.println("NÚMERO DE PARCELAS INVÁLIDO");
 							System.out.println("DESEJA CONTINUAR COMPRANDO? [S]-SIM [N]-NÃO");
 							opcaoCompra = leia.next().toUpperCase().charAt(0);
-						}
-								
+						}			
 					}
-					System.out.printf("IMPOSTOS: R$%.2f",precoTotal*0.09);
-					
-					
 				}
 				}while(opcaoCompra == 'S');	
 			}
