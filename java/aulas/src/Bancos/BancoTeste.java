@@ -3,164 +3,301 @@ package Bancos;
 import java.util.Scanner;
 
 public class BancoTeste {
-	public static void main(String[] args) {
+
+	public static void main(String[] args)
+	{
 		Scanner leia = new Scanner(System.in);
-		ContaPoupanca contapop = new ContaPoupanca(1, "6565", 22);
-
+		
+		final int mov = 10;
 		char op;
-		char saida;
-		int numeroConta = 0;
-		double debito = 0, credito=0, saldo = 0;
-		char continuaMenu = 0;
-		double movimentos[] = new double[3];
-		char continuaLoop;
-		char debitoOuCredito;
-
-		do {
+		int numeroConta=0, opcaoMenu =0;
+		char continuaMenu='0';
+		char continuaMov ='N';
+		
+		
+		
 			System.out.println("G1-BANK");
-
 			System.out.println("1 - Abertura de conta: ");
 			System.out.println("2 - Acesso a uma conta existente: ");
 			System.out.println("3 - Sair: ");
 			op = leia.next().charAt(0);
-			if (op == '1') {
-				System.out.println("1 - Conta PoupanÁa");
-				System.out.println("2 - Conta Corrente");
-				System.out.println("3 - Conta Especial");
-				System.out.println("4 - Conta Empresa");
-				System.out.println("5 - conta Universitaria");
-				System.out.print("Digite o numero de sua opÁ„o: ");
+			if (op == '1')
+			{
+				System.out.println("1 - CONTA POUPAN√áA");
+				System.out.println("2 - CONTA CORRENTE");
+				System.out.println("3 - CONTA ESPECIAL");
+				System.out.println("4 - CONTA EMPRESA");
+				System.out.println("5 - CONTA UNIVERSIT√ÅRIA");
+				System.out.print("DIGITE O N√öMERO DA OP√á√ÉO DESEJADA: ");
 				char opconta = leia.next().charAt(0);
 				numeroConta++;
 				System.out.println("Digite o seu CPF:");
 				String cpfConta = leia.next();
-				switch (opconta) {
-				case '1': {
+				
+				
+				switch (opconta)
+				{
+					case '1': //poupanca
+						double movimentos[] = new double[mov];
+						char continuaLoop='0';
+						char debitoOuCredito;
+						
+						System.out.println("DIGITE A DATA DE ABERTURA DA CONTA:_");
+						int aniversarioConta = leia.nextInt();
+						
+						ContaPoupanca contapop = new ContaPoupanca(numeroConta, cpfConta, aniversarioConta);
+						
+						System.out.println("DIGITE O DIA DE HOJE: ");
+						int dataAtual = leia.nextInt();
+						
+						do {
+							menuInicial();
+							opcaoMenu = leia.next().charAt(0);
+						switch(opcaoMenu) {
+						case '1':
+							for (int i = 0; i < mov; i++) {
+								System.out.println("MOVIMENTA√á√ÉO " + (i + 1) + " - [D]D√âBITO OU [C] CR√âDITO");
+								debitoOuCredito = leia.next().toUpperCase().charAt(0);
 
-					System.out.println("Digite a data de abertura da conta: ");
-					contapop.setDataAniversarioConta(leia.nextInt());
+								if (debitoOuCredito == 'D') {//DEBITO
+									System.out.println("DIGITE O VALOR DO D√âBITO: R$");
+									double valorDebito = leia.nextDouble();
+									
+									if (contapop.getSaldo() >= valorDebito) {
+										contapop.debito(valorDebito);
+										if (i == (mov-1)) {
+											movimentos[i] = contapop.getSaldo() -contapop.debito;
 
-					System.out.println("DIGITE O DIA DE HOJE: ");
-					int dataAtual = leia.nextInt();
-					for (int i = 0; i < 3; i++) {
+											if (contapop.getDataAniversarioConta() == dataAtual && contapop.getSaldo() > 0) {
+												contapop.getSaldo();
+												contapop.correcaoPoupanca(dataAtual);
+												System.out.println(
+														"PARAB√âNS HOJE √â O ANIVERS√ÅRIO DA SUA CONTA! O SEU SALDO RENDEU!");
+												System.out.printf("SALDO ATUAL: R$ %.2f", contapop.getSaldo());
+												pula();
+												System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
+												continuaMenu = leia.next().toUpperCase().charAt(0);
 
-						System.out.println("MOVIMENTA«√O " + (i + 1) + " - [D]D…BITO OU [C] CR…DITO");
-						debitoOuCredito = leia.next().toUpperCase().charAt(0);
+											} else if (contapop.getDataAniversarioConta() == dataAtual
+													&& contapop.getSaldo() == 0) {
+												
+												System.out.println("PARAB√âNS HOJE √â O ANIVERS√ÅRIO DA SUA CONTA!");
+												System.out.println("INFELIZMENTE N√ÉO HOUVE RENDIMENTO POIS SEU SALDO √â R$0,00");
+												System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
+												continuaMenu = leia.next().toUpperCase().charAt(0);
+												if(continuaMenu == 'S') {
+													break;
+												}
 
-						if (debitoOuCredito == 'D') {
-							System.out.println("DIGITE O VALOR DO D…BITO: R$");
-							contapop.debito(leia.nextDouble());
-							if (contapop.getSaldo() >= contapop.debito) {
+											} else {
+												pula();
+												System.out.printf("SALDO ATUAL: R$ %.2f\n", contapop.getSaldo());
+												System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
+												continuaMenu = leia.next().toUpperCase().charAt(0);
+												if(continuaMenu == 'S') {
+													break;
+												}
+											}
+										} else {
+											movimentos[i] = contapop.getSaldo() - contapop.debito;
+											pula();
+											System.out.printf("SALDO ATUAL: R$ %.2f", contapop.getSaldo());
+											System.out.println("\nDESEJA CONTINUAR? S/N");
+											continuaLoop = leia.next().toUpperCase().charAt(0);
+											if (continuaLoop == 'N') {
+												break;
+											}
+										}
 
-								if (i == 2) {
-									movimentos[i] = (-contapop.debito);
-									movimentos[i] = contapop.getSaldo();
-
-									if (contapop.getDataAniversarioConta() == dataAtual && contapop.getSaldo() > 0) {
-										contapop.getSaldo();
-										contapop.correcaoPoupanca(i);
-										System.out.println(
-												"PARAB…NS HOJE … O ANIVERS¡RIO DA SUA CONTA! O SEU SALDO RENDEU!");
-										System.out.printf("SALDO ATUAL: R$ %.2f", contapop.getSaldo());
-										pula();
-										System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
-										continuaMenu = leia.next().toUpperCase().charAt(0);
-
-									} else if (contapop.getDataAniversarioConta() == dataAtual
-											&& contapop.getSaldo() == 0) {
+									} else if (contapop.getSaldo() < valorDebito) {
+										if (i == (mov-1)) {
+											pula();
+											System.out.println("SALDO INSULFICIENTE");
+											
+											System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
+											continuaMenu = leia.next().toUpperCase().charAt(0);
+											if(continuaMenu == 'S') {
+												break;
+											}
+										} else {
+											System.out.println("\nDESEJA CONTINUAR? S/N");
+											continuaLoop = leia.next().toUpperCase().charAt(0);
+											if (continuaLoop == 'N') {
+												break;
+											}
+										}
+									}
+								} else if (debitoOuCredito == 'C') {//credito
+									if (i == (mov-1)) {
+										System.out.println("DIGITE O VALOR DO CR√âDITO: R$");
+										contapop.credito(leia.nextDouble());
+										movimentos[i] += contapop.credito;
 										
-										System.out.println("PARAB…NS HOJE … O ANIVERS¡RIO DA SUA CONTA!");
-										System.out.println("INFELIZMENTE N√O HOUVE RENDIMENTO POIS SEU SALDO … R$0,00");
-										System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
+										contapop.correcaoPoupanca(dataAtual);
+										System.out.printf("SALDO ATUAL: R$ %.2f", contapop.getSaldo());
+										
+										System.out.println("DESEJA VOLTAR AO MENU INICIAL? S/N");
 										continuaMenu = leia.next().toUpperCase().charAt(0);
+										if(continuaMenu == 'S') {
+											break;
+										}
 
 									} else {
-										pula();
-										System.out.printf("SALDO ATUAL: R$ %.2f\n", contapop.getSaldo());
-										System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
-										continuaMenu = leia.next().toUpperCase().charAt(0);
+										System.out.println("DIGITE O VALOR DO CR√âDITO: R$");
+										contapop.credito(leia.nextDouble());
+										movimentos[i] += contapop.getSaldo();
+										System.out.printf("SALDO ATUAL: R$ %.2f", contapop.getSaldo());
+										System.out.println("\nDESEJA CONTINUAR? S/N");
+										continuaLoop = leia.next().toUpperCase().charAt(0);
+										if (continuaLoop == 'N') {
+											break;
+										}
 									}
 								}
-									
-								else {
-									movimentos[i] = (-contapop.debito);
-									movimentos[i] += contapop.getSaldo();
-									pula();
-									System.out.printf("SALDO ATUAL: R$ %.2f", contapop.getSaldo());
-									System.out.println("DESEJA CONTINUAR? S/N");
-									continuaLoop = leia.next().toUpperCase().charAt(0);
-									if (continuaLoop == 'N') {
-										break;
-									}
-								}
-
-							} else if (contapop.getSaldo() < contapop.debito) {
-								pula();
-								System.out.println("SALDO INSULFICIENTE");
-								System.out.println("DESEJA CONTINUAR? S/N");
-								continuaLoop = leia.next().toUpperCase().charAt(0);
-								if (i == 2) {
-									pula();
-									System.out.println("SALDO INSULFICIENTE");
-									System.out.println("DESEJA CONTINUAR? S/N");
-									continuaLoop = leia.next().toUpperCase().charAt(0);
-									System.out.println("DESEJA RETORNAR AO MENU INICIAL? S/N");
-									continuaMenu = leia.next().toUpperCase().charAt(0);
-								}
-							if (continuaLoop == 'N') {
-								break;
-							}
-						}
-
-						} else if (debitoOuCredito == 'C') {
-							if (i == 2) {
-								System.out.println("DIGITE O VALOR DO CR…DITO: R$");
-								contapop.credito(leia.nextDouble());
-								movimentos[i] += contapop.credito;
-								
-								contapop.correcaoPoupanca(dataAtual);
-
-							} else {
-								System.out.println("DIGITE O VALOR DO CR…DITO: R$");
-								contapop.credito(leia.nextDouble());
-								movimentos[i] += contapop.getSaldo();
-								System.out.println("DESEJA CONTINUAR? S/N");
-								continuaLoop = leia.next().toUpperCase().charAt(0);
-								if (continuaLoop == 'N') {
-									break;
-								}
-							}
-						}
 					}
-				}
+						break;
+						case '2':
+							System.out.println("N√öMERO DA CONTA: "+ contapop.getNumeroConta());
+							System.out.println("SALTO ATUAL: "+ contapop.getSaldo());
+							System.out.println("DESEJA VOLTAR AO MENU INICIAL? S/N");
+							continuaMenu = leia.next().toUpperCase().charAt(0);
+						break;
+						
+						case '3':
+							System.out.println("OBRIGADO POR UTILIZAR O G1-BANK");
+						break;
+						}
+				}while(continuaLoop == 'N' || continuaMenu == 'S');
 
-				break;
-				case '2': {
-					System.out.println("Digite o n˙mero de talıes desejados: ");
-					int numeroTalaoCeque = leia.nextInt();
-					ContaCorrente corrente = new ContaCorrente(numeroConta, cpfConta, numeroTalaoCeque);
+					break;
+					
+					case '2': //corrente
+						//aqui vai a conta corrente!
+						System.out.println("W.I.P. - Ainda estamos trabalhando...");
+					break;
+					
+					case '3': //especial
+						//aqui vai a conta especial!
+						System.out.println("W.I.P. - Ainda estamos trabalhando...");
+					break;
+					
+					case '4': //empresa
+						//aqui vai a conta empresa!
+						System.out.println("W.I.P. - Ainda estamos trabalhando...");
+					break;
+					
+					case '5': //universitaria
+						System.out.println("QAUL O VALOR DO LIMITE?");
+						ContaUniversitaria contaU = new ContaUniversitaria(numeroConta, leia.nextDouble());
+						do {
+						menuInicial();
+						opcaoMenu = leia.next().charAt(0);
+						
+						switch(opcaoMenu) {
+							case '1':
+								for(int i=0; i<mov; i++) {
+								System.out.println("MOVIMENTO " + (i+1));
+								System.out.println("[C]-CR√âDITO / [D]-D√âBITO:_");
+								op = leia.next().toUpperCase().charAt(0);
+								
+								if(op == 'C') {
+									if(i == (mov-1)) {
+										System.out.println("DIGITE O VALOR A SER CREDITADO:_");
+										double valorCredito = leia.nextDouble();
+										contaU.credito(valorCredito);
+										contaU.restituiLimiteCadastrado();
+										System.out.println("SALDO ATUAL: "+ contaU.getSaldo());
+										System.out.println("LIMITE DISPON√çVEL: "+ contaU.getLimite());
+									} else {
+										System.out.println("DIGITE O VALOR A SER CREITADO:_");
+										double valorCredito = leia.nextDouble();
+										contaU.credito(valorCredito);
+										contaU.restituiLimiteCadastrado();
+										System.out.println("SALDO ATUAL: "+ contaU.getSaldo());
+										System.out.println("LIMITE DISPON√çVEL: "+ contaU.getLimite());
+										System.out.println("\nDESEJA CONTINUAR AS MOVIMENTA√á√ïES? S/N");
+										continuaMov = leia.next().toUpperCase().charAt(0);
+										if(continuaMov == 'N') {
+										break;
+										}
+									}
+									
+								} else if(op == 'D') {
+									if(i == (mov-1)) {
+										System.out.println("DIGITE O VALOR A SER DEBITADO:_");
+										double valorDebito = leia.nextDouble();
+										contaU.testarSaldo(valorDebito);
+										contaU.debito(valorDebito);
+										System.out.println("SALDO ATUAL: "+ contaU.getSaldo());
+										System.out.println("LIMITE DISPON√çVEL: "+ contaU.getLimite());
+									} else {
+										System.out.println("DIGITE O VALOR A SER DEBITADO:_");
+										double valorDebito = leia.nextDouble();
+										contaU.testarSaldo(valorDebito);
+										contaU.debito(valorDebito);
+										System.out.println("SALDO ATUAL: "+ contaU.getSaldo());
+										System.out.println("LIMITE DISPON√çVEL: "+ contaU.getLimite());
+										System.out.println("\nDESEJA CONTINUAR AS MOVIMENTA√á√ïES? S/N");
+										continuaMov = leia.next().toUpperCase().charAt(0);
+										if(continuaMov == 'N') {
+											break;
+										}
+									}
+									
+								}
+								}
+						
+							break;
+						
+							case '2':
+								System.out.println("N√öMERO DA CONTA: "+ contaU.getNumeroConta());
+								System.out.println("SALTO ATUAL: "+ contaU.getSaldo());
+								System.out.println("LIMITE DISPON√çVEL: R$" + contaU.getLimite());
+								System.out.println("DESEJA VOLTAR AO MENU INICIAL? S/N");
+								continuaMenu = leia.next().toUpperCase().charAt(0);
+							break;
+							
+							case '3':
+								System.out.println("OBRIGADO POR UTILIZAR O G1-BANK!");
+							break;
+						}
+				}while(continuaMov == 'N');
+					break;
+				
 				}
 			}
-		} 
-			else if (op == '2') 
+			else if (op == '2')
 			{
-				System.out.println("WIP");
-			} 
-			else if(op == '3')
-			{
-				System.out.println("OBRIGADO POR ESCOLHER O G1-BANK!");
+				System.out.println("W.I.P - Ainda estamos trabalhando...");
 			}
-
-		} while (continuaMenu == 'S');
+			else
+			{
+				
+			}
+			
+		
+		
+		leia.close();		
 	}
-
-	static void linha() {
-		int tamanho = 19;
-		for (int x = 1; x <= tamanho; x++)
-			System.out.print("-");
+	
+	public static void menuInicial() {
+		linha(15);
+		pula();
+		System.out.println("[1] - MOVIMENTA√á√ÉO");
+		System.out.println("[2] - SALDO");
+		System.out.println("[3] - SAIR");
+		linha(15);			
+		
 	}
-
+	
+	public static void linha(int tamanho) {
+		for(int x=0; x<tamanho; x++) {
+			System.out.print("üí∏");
+		}
+	}
+	
 	static void pula() {
 		System.out.println();
 	}
+
 }
