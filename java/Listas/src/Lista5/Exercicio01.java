@@ -65,13 +65,15 @@ public class Exercicio01 {
 		valorFinal = leia.nextDouble();
 		pula();
 	}
-	public static void linha() {
-		
+
+	public static void linha() 
+	{	
 		int tamanho = 15;
 		for(int x = 1;x<=tamanho;x++)	
 		System.out.print("🛒");
 	}
-	public static void pula() {
+	public static void pula() 
+	{
 		System.out.println();
 	}
 }

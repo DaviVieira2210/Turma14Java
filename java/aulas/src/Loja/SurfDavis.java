@@ -99,13 +99,13 @@ public class SurfDavis{
 							System.out.println("\tCARRINHO DE COMPRAS");
 							prod.tiraEstoque(quantidade);
 							precoTotal = prod.getPrecoUnitario() * quantidade;
-							System.out.print("PREÇO UNITÁRIO: "+prod.getNomeProduto());
+							System.out.print(prod.getNomeProduto());
 							System.out.printf("  R$%.2f\n",prod.getPrecoUnitario());							
-							System.out.printf("PREÇO TOTAL: R$%.2f\n", precoTotal);
+							System.out.printf("VALOR TOTAL: R$%.2f\n", precoTotal);
 							linha();
-							pula();
+							pula();	
 							carrinho.add(new Produto(prod.getNomeProduto(), prod.getCodigo(), prod.getPrecoUnitario(), prod.getQtdeProdutoEstoque()));
-							
+
 						}
 						else if(quantidade > prod.getQtdeProdutoEstoque())
 						{

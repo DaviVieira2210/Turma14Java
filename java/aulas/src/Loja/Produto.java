@@ -47,7 +47,7 @@ public class Produto
 		return qtdeProdutoEstoque;
 	}
 	
-	//Métodos
+	//Método 1
 	/*public void tiraEstoque(int saida) 
 	{
 		if (testarEstoque(saida))
@@ -61,7 +61,7 @@ public class Produto
 		}
 		
 	}*/
-	//método 2
+	//Método 2
 	public void tiraEstoque(int quantidade)
 	{
 		this.qtdeProdutoEstoque = this.qtdeProdutoEstoque - quantidade;
